@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迎接2026 | 元旦快乐</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #fefefe;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 简约标题样式 */
+        .minimal-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+        
+        .minimal-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #4a6fa5, #6d9dc5);
+        }
+        
+        .minimal-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .minimal-header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 年份显示 */
+        .year-display {
+            text-align: center;
+            margin: 40px 0 60px;
+        }
+        
+        .year-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .year-number::before {
+            content: "2026";
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: rgba(44, 62, 80, 0.07);
+            font-size: 10rem;
+            z-index: -1;
+            transform: translate(-10px, -10px);
+        }
+        
+        /* 倒计时区域 */
+        .countdown-section {
+            background-color: #f8f9fa;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 50px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .countdown-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        
+        .countdown-unit {
+            background: white;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .countdown-unit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .unit-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a6fa5;
+            line-height: 1;
+        }
+        
+        .unit-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 祝福卡片区域 */
+        .blessings-section {
+            margin: 70px 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: #6d9dc5;
+        }
+        
+        .blessings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .blessing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blessing-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4a6fa5, #6d9dc5);
+        }
+        
+        .blessing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .blessing-icon {
+            font-size: 2rem;
+            color: #4a6fa5;
+            margin-bottom: 20px;
+        }
+        
+        .blessing-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        /* 简约祝福生成器 */
+        .generator-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef2f7 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .generator-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .generator-subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .blessing-display {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 400;
+            min-height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .blessing-display::before {
+            content: "“";
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(77, 111, 165, 0.1);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .generator-button {
+            background: linear-gradient(to right, #4a6fa5, #6d9dc5);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(77, 111, 165, 0.2);
+            margin: 10px;
+        }
+        
+        .generator-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(77, 111, 165, 0.3);
+        }
+        
+        .generator-button i {
+            margin-right: 10px;
+        }
+        
+        /* 分享功能区域 */
+        .share-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .share-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .share-subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .share-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #4a6fa5;
+            box-shadow: 0 0 0 3px rgba(77, 111, 165, 0.1);
+        }
+        
+        .share-button {
+            background: linear-gradient(to right, #6d9dc5, #4a6fa5);
+            color: white;
+            border: none;
+            padding: 16px 50px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(77, 111, 165, 0.2);
+            margin-top: 20px;
+        }
+        
+        .share-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(77, 111, 165, 0.3);
+        }
+        
+        .share-result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .share-link {
+            word-break: break-all;
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .copy-button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .copy-button:hover {
+            background: #4a6fa5;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #bdc3c7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        /* 简约装饰元素 */
+        .decoration-circle {
+            position: fixed;
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.03;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: #4a6fa5;
+            top: 10%;
+            left: 5%;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            background: #6d9dc5;
+            bottom: 15%;
+            right: 8%;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .minimal-header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .year-number {
+                font-size: 6rem;
+            }
+            
+            .year-number::before {
+                font-size: 8rem;
+            }
+            
+            .blessings-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .minimal-header {
+                padding: 40px 0 30px;
+            }
+            
+            .minimal-header h1 {
+                font-size: 2.3rem;
+            }
+            
+            .year-number {
+                font-size: 5rem;
+            }
+            
+            .countdown-unit {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .unit-value {
+                font-size: 2rem;
+            }
+            
+            .blessing-display {
+                font-size: 1.2rem;
+                padding: 30px 25px;
+            }
+            
+            .decoration-circle {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .minimal-header h1 {
+                font-size: 2rem;
+            }
+            
+            .year-number {
+                font-size: 4rem;
+            }
+            
+            .countdown-container {
+                gap: 15px;
+            }
+            
+            .countdown-unit {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .unit-value {
+                font-size: 1.7rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .blessings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰元素 -->
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    
+    <div class="container">
+        <!-- 简约标题区域 -->
+        <header class="minimal-header">
+            <h1>迎接 2026</h1>
+            <p>新年的钟声即将敲响，愿美好与希望同行，温暖与幸福相伴</p>
+        </header>
+        
+        <!-- 年份展示 -->
+        <div class="year-display">
+            <div class="year-number">2026</div>
+        </div>
+        
+        <!-- 倒计时区域 -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">新年倒计时</h2>
+            <div class="countdown-container">
+                <div class="countdown-unit">
+                    <div class="unit-value" id="days">00</div>
+                    <div class="unit-label">天</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="unit-value" id="hours">00</div>
+                    <div class="unit-label">小时</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="unit-value" id="minutes">00</div>
+                    <div class="unit-label">分</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="unit-value" id="seconds">00</div>
+                    <div class="unit-label">秒</div>
+                </div>
+            </div>
+            <p style="margin-top: 30px; color: #7f8c8d; font-size: 1rem;">距离2026年元旦还有</p>
+        </section>
+        
+        <!-- 祝福语卡片区域 -->
+        <section class="blessings-section">
+            <h2 class="section-title">元旦祝福</h2>
+            <div class="blessings-grid">
+                <div class="blessing-card">
+                    <div class="blessing-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p class="blessing-text">愿新的一年里，平安喜乐常伴左右，健康幸福永驻心间。2026，愿您与所爱之人共度美好时光。</p>
+                </div>
+                
+                <div class="blessing-card">
+                    <div class="blessing-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="blessing-text">元旦到来，万象更新。愿您的事业如旭日东升，步步高升；生活如诗如画，精彩纷呈。</p>
+                </div>
+                
+                <div class="blessing-card">
+                    <div class="blessing-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <p class="blessing-text">新的一年，新的起点。愿您追寻梦想的旅途一帆风顺，所有的努力都能开花结果。</p>
+                </div>
+                
+                <div class="blessing-card">
+                    <div class="blessing-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <p class="blessing-text">愿2026年的每一天都充满阳光与希望，每一次努力都有回报，每一份付出都被珍惜。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 简约祝福生成器 -->
+        <section class="generator-section">
+            <h2 class="generator-title">生成专属祝福</h2>
+            <p class="generator-subtitle">点击按钮，为亲朋好友生成独特的2026年元旦祝福语</p>
+            
+            <div class="blessing-display" id="blessingDisplay">
+                愿新年的第一缕阳光照亮您前行的道路，2026年的每一天都充满喜悦与收获。
+            </div>
+            
+            <button class="generator-button" id="generateButton">
+                <i class="fas fa-sync-alt"></i> 生成新祝福
+            </button>
+        </section>
+        
+        <!-- 定制化分享功能 -->
+        <section class="share-section">
+            <h2 class="share-title">分享元旦祝福</h2>
+            <p class="share-subtitle">创建专属祝福链接，分享给亲朋好友，传递新年的温暖与祝福</p>
+            
+            <div class="share-form">
+                <div class="form-group">
+                    <label class="form-label" for="senderName">您的名字（祝福者）</label>
+                    <input type="text" id="senderName" class="form-input" placeholder="请输入您的名字" value="小孔">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="receiverName">接收者名字</label>
+                    <input type="text" id="receiverName" class="form-input" placeholder="请输入接收者的名字" value="朋友们">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="customMessage">祝福语（可选）</label>
+                    <input type="text" id="customMessage" class="form-input" placeholder="可自定义祝福语，留空则使用默认祝福">
+                </div>
+                
+                <button class="share-button" id="shareButton">
+                    <i class="fas fa-share-alt"></i> 生成分享链接
+                </button>
+            </div>
+            
+            <div class="share-result" id="shareResult">
+                <h3 style="margin-bottom: 15px; color: #2c3e50;">您的专属祝福链接已生成</h3>
+                <p class="share-link" id="generatedLink"></p>
+                <button class="copy-button" id="copyButton">
+                    <i class="fas fa-copy"></i> 复制链接
+                </button>
+                <p style="margin-top: 15px; color: #7f8c8d; font-size: 0.9rem;">将此链接发送给接收者，他们将看到您定制的元旦祝福</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h2 class="footer-title">元旦快乐</h2>
+                <p class="footer-text">愿这份简约的祝福，为您带去新年的温暖与希望。2026年，愿所有美好如期而至。</p>
+                
+                <div class="copyright">
+                    <p>© 2025 迎接2026元旦 | 简约设计 | 祝福传递温暖</p>
+                    <p style="margin-top: 10px;">愿我们都能在新的一年里，遇见更好的自己</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // 设置目标时间为2026年1月1日
+        const targetDate = new Date('January 1, 2026 00:00:00').getTime();
+        
+        // 更新倒计时
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // 如果已经过了2026年元旦
+                document.getElementById('days').textContent = "00";
+                document.getElementById('hours').textContent = "00";
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00";
+                
+                // 更新标题
+                document.querySelector('.minimal-header h1').textContent = "2026 新年快乐";
+            }
+        }
+        
+        // 祝福语数组
+        const blessings = [
+            "愿新年的第一缕阳光照亮您前行的道路，2026年的每一天都充满喜悦与收获。",
+            "元旦快乐！愿新的一年里，健康与平安常伴，幸福与喜悦相随，所有的梦想都能照进现实。",
+            "2026年，愿您的生活如诗如画，工作顺心如意，家庭和睦美满，每一天都充满阳光与希望。",
+            "新年的钟声即将敲响，愿您抛却过往的烦恼，拥抱未来的美好，2026年一切顺利！",
+            "元旦到来，万象更新。愿您在新的一年里，事业步步高升，生活甜甜蜜蜜，幸福永驻心间。",
+            "2026年，愿您有新的目标、新的收获、新的成长。每一天都离梦想更近一步。",
+            "愿新年的喜悦伴您度过每一个清晨与黄昏，2026年的每一天都值得珍惜与纪念。",
+            "元旦佳节，送上最真挚的祝福。愿您在新的一年里，笑口常开，好运连连，万事如意。",
+            "2026年，愿您走过的每一步都坚定有力，经历的每一天都充实美好，遇到的每个人都温暖善良。",
+            "新的一年，愿所有的希望都能如愿，所有的付出都有回报，所有的等待都有结果。元旦快乐！",
+            "2026年，愿您的生活少一些烦恼，多一些欢笑；少一些坎坷，多一些顺利；少一些遗憾，多一些圆满。",
+            "元旦到来，愿您和家人团圆美满，和朋友情谊深厚，和自己和谐相处，2026年一切安好。"
+        ];
+        
+        // 生成随机祝福语
+        function generateBlessing() {
+            const displayElement = document.getElementById('blessingDisplay');
+            const randomIndex = Math.floor(Math.random() * blessings.length);
+            const newBlessing = blessings[randomIndex];
+            
+            // 淡出效果
+            displayElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                displayElement.textContent = newBlessing;
+                // 淡入效果
+                displayElement.style.transition = 'opacity 0.5s ease';
+                displayElement.style.opacity = '1';
+            }, 300);
+        }
+        
+        // 生成分享链接
+        function generateShareLink() {
+            const sender = document.getElementById('senderName').value.trim() || "祝福者";
+            const receiver = document.getElementById('receiverName').value.trim() || "朋友";
+            const customMessage = document.getElementById('customMessage').value.trim();
+            
+            // 创建基本URL
+            let baseUrl = window.location.href.split('?')[0];
+            
+            // 构建查询参数
+            const params = new URLSearchParams();
+            params.append('from', encodeURIComponent(sender));
+            params.append('to', encodeURIComponent(receiver));
+            
+            if (customMessage) {
+                params.append('message', encodeURIComponent(customMessage));
+            }
+            
+            // 添加时间戳确保链接唯一
+            params.append('t', Date.now());
+            
+            // 构建完整链接
+            const shareLink = `${baseUrl}?${params.toString()}`;
+            
+            // 显示结果
+            const resultElement = document.getElementById('shareResult');
+            const linkElement = document.getElementById('generatedLink');
+            
+            linkElement.textContent = shareLink;
+            resultElement.style.display = 'block';
+            
+            // 滚动到结果区域
+            resultElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            return shareLink;
+        }
+        
+        // 复制链接到剪贴板
+        function copyToClipboard() {
+            const linkElement = document.getElementById('generatedLink');
+            const linkText = linkElement.textContent;
+            
+            navigator.clipboard.writeText(linkText).then(() => {
+                const copyButton = document.getElementById('copyButton');
+                const originalText = copyButton.innerHTML;
+                copyButton.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                copyButton.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    copyButton.innerHTML = originalText;
+                    copyButton.style.background = '#2c3e50';
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败: ', err);
+                alert('复制失败，请手动复制链接');
+            });
+        }
+        
+        // 检查URL参数并显示定制祝福
+        function checkUrlParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const from = urlParams.get('from');
+            const to = urlParams.get('to');
+            const message = urlParams.get('message');
+            
+            if (from && to) {
+                // 解码参数
+                const decodedFrom = decodeURIComponent(from);
+                const decodedTo = decodeURIComponent(to);
+                const decodedMessage = message ? decodeURIComponent(message) : null;
+                
+                // 创建定制祝福消息
+                let customBlessing = `来自 ${decodedFrom} 给 ${decodedTo} 的元旦祝福：`;
+                
+                if (decodedMessage) {
+                    customBlessing += ` ${decodedMessage}`;
+                } else {
+                    // 使用随机祝福语
+                    const randomIndex = Math.floor(Math.random() * blessings.length);
+                    customBlessing += ` ${blessings[randomIndex]}`;
+                }
+                
+                // 更新页面标题和祝福显示
+                document.querySelector('.minimal-header h1').textContent = `来自 ${decodedFrom} 的祝福`;
+                document.querySelector('.minimal-header p').textContent = `给 ${decodedTo} 的2026年元旦祝福`;
+                
+                // 更新祝福生成器显示
+                document.getElementById('blessingDisplay').textContent = customBlessing;
+                
+                // 更新分享表单
+                document.getElementById('senderName').value = decodedFrom;
+                document.getElementById('receiverName').value = decodedTo;
+                if (decodedMessage) {
+                    document.getElementById('customMessage').value = decodedMessage;
+                }
+                
+                // 显示一个提示
+                setTimeout(() => {
+                    alert(`您收到了来自 ${decodedFrom} 的元旦祝福！`);
+                }, 500);
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化倒计时
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // 绑定生成祝福按钮事件
+            document.getElementById('generateButton').addEventListener('click', generateBlessing);
+            
+            // 绑定分享按钮事件
+            document.getElementById('shareButton').addEventListener('click', generateShareLink);
+            
+            // 绑定复制按钮事件
+            document.getElementById('copyButton').addEventListener('click', copyToClipboard);
+            
+            // 为祝福卡片添加点击效果
+            const blessingCards = document.querySelectorAll('.blessing-card');
+            blessingCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-8px)';
+                    }, 150);
+                });
+            });
+            
+            // 添加一些随机祝福到生成器
+            setTimeout(() => {
+                generateBlessing();
+            }, 2000);
+            
+            // 检查URL参数
+            checkUrlParams();
+        });
+        
+        // 更新年份显示逻辑
+        window.addEventListener('load', function() {
+            const currentYear = new Date().getFullYear();
+            const yearElement = document.querySelector('.year-number');
+            
+            // 如果已经过了元旦，显示当前年份
+            const now = new Date();
+            if (now.getMonth() === 0 && now.getDate() === 1 && now.getFullYear() === 2026) {
+                yearElement.textContent = "2026";
+                document.querySelector('.minimal-header h1').textContent = "2026 新年快乐";
+            }
+        });
+    </script>
+</body>
+</html>
